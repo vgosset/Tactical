@@ -13,6 +13,7 @@ public class Action : MonoBehaviour
 
     public Text pa;
     public Text pm;
+    public Text life;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class Action : MonoBehaviour
 
         pm.text = action.pm_cost.ToString();
         pa.text = action.pa_cost.ToString();
+        life.text = action.damage.ToString();
     }
 
     public void SendAction()
