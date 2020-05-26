@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   n_pa: 6
+  n_pm: 0
   selectableTiles: []
   c_datas: {fileID: 11400000, guid: c5cc742d306a2e8439167ad7dc6a1305, type: 2}
   character: {fileID: 5192611924024758936}
@@ -1112,7 +1113,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a5e95851440621b49a926fee5f0158ae, type: 2}
+  - {fileID: 2100000, guid: 292cf883628f35a40b354b4f168f3afc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
