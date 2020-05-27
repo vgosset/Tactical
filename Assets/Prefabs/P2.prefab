@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9096377056811867812}
   - component: {fileID: 5192611924024758936}
   - component: {fileID: 1965136661766521171}
+  - component: {fileID: 4940303830224435399}
   m_Layer: 0
   m_Name: P2
   m_TagString: Character
@@ -87,6 +88,7 @@ MonoBehaviour:
   tiles: []
   c_tile: {fileID: 0}
   m_characterMove: {fileID: 9096377056811867812}
+  fovHandeler: {fileID: 4940303830224435399}
   t_passed: 0
   t_current: 0
   t_currentId: 0
@@ -104,6 +106,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   n_life: 5
   isDead: 0
+--- !u!114 &4940303830224435399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227657220389509891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2e96353cb32bb4ca11f1f2e171769c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 3
+  viewAngle: 360
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 256
+  ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 512
+  visibleTargets: []
 --- !u!1 &3316806069886575897
 GameObject:
   m_ObjectHideFlags: 0

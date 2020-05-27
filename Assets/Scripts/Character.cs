@@ -6,6 +6,7 @@ public class Character : TacticsActions
 {
     public Tile c_tile;
     public CharacterMove m_characterMove;
+    public FieldOfView fovHandeler;
 
     public bool t_passed = false;
     public bool t_current = false;
@@ -22,25 +23,19 @@ public class Character : TacticsActions
 
     void Update()
     {
-        ActionsHandeler();
+        if (t_current && c_action)
+            CheckMouseFire();
     }
-    void ActionsHandeler()
+    public void ActionsHandeler()
     {
-        if (t_current && ActionManager.Instance.c_actionOn )
+        if (t_current)
         {
             if  (c_action && c_action.t_action == ActionType.LINE)
-            {
                 GetTileInLine(c_action.t_target.minRange, c_action.t_target.maxRange, c_action.t_target.ldv);
-                CheckMouseFire();
-            }
             if (c_action && c_action.t_action == ActionType.CLASSIC)
-            {
-                FindTileAll(c_action.t_target.minRange, c_action.t_target.maxRange, c_action.t_target.ldv);
-                CheckMouseFire();
-            }
+                fovHandeler.FindClassicSelectableTile(c_action.t_target.minRange, c_action.t_target.maxRange, c_action.t_target.ldv);
         }
     }
-
     public void ResetSkills()
     {
         n_pa = c_datas.n_pa;

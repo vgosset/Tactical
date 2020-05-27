@@ -144,6 +144,7 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectedTiles();
             moving = false;
+            character.ActionsHandeler();
         }
     }
     protected void RemoveSelectedTiles()

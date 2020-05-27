@@ -24,19 +24,12 @@ public class FieldOfView : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(FintTargetsWithDelat(2));
     }
-    IEnumerator FintTargetsWithDelat(float delay)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds (delay);
-            FindVisibleTargets();
-        }
-    }
-    void FindVisibleTargets()
+    public void FindClassicSelectableTile(int minRange, int maxRange, bool ldv)
     {
         visibleTargets.Clear();
+
+        viewRadius = maxRange;
 
         Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
@@ -49,15 +42,15 @@ public class FieldOfView : MonoBehaviour
             {
                 float dstTarget = Vector3.Distance(transform.position, target.position);
 
-                if (Physics.Raycast (transform.position, dirToTarget, dstTarget, ObstacleMask))
+                if (!Physics.Raycast (transform.position, dirToTarget, dstTarget, ObstacleMask))
                 {
                     visibleTargets.Add(target);
                 }
             }
         }
-        // foreach (Transform visibleTarget in visibleTargets)
-        // {
-        //     visibleTarget.GetComponent<Tile>().target = true; 
-        // }
+        foreach (Transform visibleTarget in visibleTargets)
+        {
+            visibleTarget.GetComponent<Tile>().selectableAction = true; 
+        }
     }
 }

@@ -88,7 +88,6 @@ public class TacticsActions : MonoBehaviour
         if (ldv && CheckObstacleBeforeMinRange(direction, minRange) || !ldv)
         {
             RaycastHit hit;
-            Debug.Log(CheckObstacleBeforeMinRange(direction, minRange));
             Vector3 pos = new Vector3(transform.position.x, 0, transform.position.z);
             List<Tile> tmpLine = new List<Tile>();
 

@@ -59,7 +59,7 @@ public class ActionManager : MonoBehaviour
     {
         c_char.c_action = null;
         c_MovementOn = true;
-        c_actionOn = false;
+        // c_actionOn = false;
         UnSelectAllTiles();
     }
 
@@ -83,8 +83,10 @@ public class ActionManager : MonoBehaviour
         
         if (c_char.n_pa >= c_action.pa_cost && c_char.n_pm >= c_action.pm_cost)
         {
-            c_actionOn = true;
+            // c_actionOn = true;
             SendAction();
+            if (!c_char.m_characterMove.moving)
+                c_char.ActionsHandeler();
         }
         else
             CancelAllActions();
