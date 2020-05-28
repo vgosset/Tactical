@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour
     public bool target = false;
     public bool selectableMove = false;
     public bool selectableAction = false;
+    public bool movementDetection = false;
 
 
     public List<Tile> adjTileLst = new List<Tile>();
@@ -31,7 +32,9 @@ public class Tile : MonoBehaviour
     {
         // if (current)
           // GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("current");
-        if (target || onCurrentPath)
+        if (movementDetection)
+            GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("MovmentDetection");
+        else if (target || onCurrentPath)
             GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("Path");
         else if (selectableMove)
           GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("PathOptions");
@@ -48,6 +51,7 @@ public class Tile : MonoBehaviour
       target = false;
       selectableMove = false;
       selectableAction = false;
+      movementDetection = false;
 
       visited = false;
       parent = null;
@@ -74,16 +78,13 @@ public class Tile : MonoBehaviour
       foreach (Collider item in colliders)
       {
         Tile tile = item.GetComponent<Tile>();
-
+        
         if (walkableTile && tile != null && tile.walkable || !walkableTile && tile != null)
         {
           if (!includePlayer && !tile.isBusy() || includePlayer)
           {
-            RaycastHit hit;
-
             adjTileLst.Add(tile);
           }
-
           // if (Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
           // {
           //
@@ -100,7 +101,6 @@ public class Tile : MonoBehaviour
         {
             if (hit.transform.tag == "Character")
                 return true;
-
         }
         return false;
     }

@@ -7,7 +7,7 @@ public class TacticsActions : MonoBehaviour
     public int n_pa;
     public int n_pm;
 
-    Tile tmptarget = new Tile();
+    Tile tmp_tileTarget = new Tile();
 
     public List<Tile> selectableTiles = new List<Tile>();
 
@@ -22,10 +22,12 @@ public class TacticsActions : MonoBehaviour
     void Start()
     {
     }
+
     void Update()
     {
 
     }
+
     public bool ActionIsPossbile()
     {
         if (c_action)
@@ -35,6 +37,7 @@ public class TacticsActions : MonoBehaviour
         }
         return false;
     }
+
     public void CheckMouseFire()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -53,14 +56,17 @@ public class TacticsActions : MonoBehaviour
                     if (!t.target)
                     {
                         t.target = true;
-                        tmptarget.target = false;
-                        tmptarget = t;
+
+                        if (c_action.t_impact == ImpactMovement.PUSH)
+                            PredictionPush(t);
+                        tmp_tileTarget.target = false;
+                        tmp_tileTarget = t;
                     }
                 }
                 else
                 {
-                    tmptarget.target = false;
-                    tmptarget = new Tile();
+                    tmp_tileTarget.target = false;
+                    tmp_tileTarget = new Tile();
                 }
             }
             if (hit.collider.tag == "Character")
@@ -74,6 +80,7 @@ public class TacticsActions : MonoBehaviour
             }
         }
     }
+
     public void GetTileInLine()
     {
         selectableTiles.Clear();
@@ -86,6 +93,7 @@ public class TacticsActions : MonoBehaviour
         if (c_action.t_target.self)
             GetCurrentTile().selectableAction = true;
     }
+
     public void FindLine(Vector3 direction)
     {
         if (c_action.t_target.ldv && CheckObstacleBeforeMinRange(direction) || !c_action.t_target.ldv)
@@ -117,6 +125,7 @@ public class TacticsActions : MonoBehaviour
             }
         }
     }
+
     bool CheckObstacleBeforeMinRange(Vector3 direction)
     {
         RaycastHit hit;
@@ -141,7 +150,7 @@ public class TacticsActions : MonoBehaviour
         return true;
     }
 
-    public void Fire(Tile t, int damage)
+    private void Fire(Tile t, int damage)
     {
         n_pa -= c_action.pa_cost;
         n_pm -= c_action.pm_cost;
@@ -166,52 +175,62 @@ public class TacticsActions : MonoBehaviour
         }
         if (!ActionIsPossbile())
             ActionManager.Instance.CancelAllActions();
-
     }
-    // public void FindTileAll(int minRange, int maxRange, bool ldv)
-    // {
-    //     selectableTiles.Clear();
 
-    //     ComputeAdjLst();
-    //     GetCurrentTile();
+    private void PredictionPush(Tile t)
+    {
+        Tile tile;
 
-    //     Queue<Tile> process = new Queue<Tile>();
+        float c_z = transform.position.z;
+        float c_x = transform.position.x;
+        float t_x = t.transform.position.x;
+        float t_z = t.transform.position.x;
 
-    //     process.Enqueue(currentTile);
-    //     currentTile.visited = true;
-    //     while (process.Count > 0)
-    //     {
-    //         Tile t = process.Dequeue();
+        Vector3 off = transform.position - t.transform.position;
+        Vector3 dir = Vector3.zero;
 
-    //         selectableTiles.Add(t);
+        if (off.x >= off.z)
+        {
+            if (c_x > t_x)
+                dir = Vector3.forward;
+            else if  (c_x < t_x)
+                dir = -Vector3.forward;  
+        }
+        
+        else if (off.x <= off.z)
+        {
+            if (c_z > t_z)
+                dir = Vector3.right; 
+            else if  (c_z < t_z)          
+                dir = -Vector3.right; 
+        }
+        GetNextTile(dir, t);
+    }
 
-    //         if (t.distance < maxRange)
-    //         {
-    //             foreach(Tile tile in t.adjTileLst)
-    //             {
-    //                 if (!tile.visited)
-    //                 {
-    //                     tile.parent = t;
-    //                     tile.visited = true;
-    //                     tile.distance = 1 + t.distance;
-    //                     process.Enqueue(tile);
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // public void ComputeAdjLst()
-    // {
-    //     foreach (GameObject tile in tiles)
-    //     {
-    //         Tile t = tile.GetComponent<Tile>();
-    //         t.FindNeighbors(2, true);
-    //     }
-    // }
+    private void GetNextTile(Vector3 direction, Tile t)
+    {
+      Vector3 halfExtants = new Vector3(0.25f, (1 + 2) / 2.0f, 0.25f);
+      Collider[] colliders = Physics.OverlapBox(t.transform.position + direction, halfExtants);
+
+      foreach (Collider item in colliders)
+      {
+        Tile tile = item.GetComponent<Tile>();
+
+        if (tile)
+        {
+            tile.movementDetection = true;
+            Debug.Log(direction);
+        }
+      }
+      if (colliders.Length == 0)
+            ActionManager.Instance.UnSelectAllTiles();
+    }
+
     public Tile GetCurrentTile()
     {
         return GetTargetTile(gameObject);
     }
+
     public Tile GetTargetTile(GameObject target)
     {
         RaycastHit hit;

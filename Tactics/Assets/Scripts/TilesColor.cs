@@ -28,6 +28,8 @@ public class TilesColor : MonoBehaviour
             return colorLst[2];
         if (id == "ActionsOptions")
             return colorLst[3];
-        return colorLst[4];
+        if (id == "MovmentDetection")
+            return colorLst[4];
+        return colorLst[5];
     }
 }

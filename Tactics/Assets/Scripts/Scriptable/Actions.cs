@@ -9,9 +9,11 @@ using System;
 public class Actions : ScriptableObject 
 {
     public ActionType t_action;
+    public ImpactMovement t_impact;
     public TargetSettings t_target;
     public ZoneEffect a_zone;
     public GameObject projectile;
+    public int movementAmount;
     public int damage;
     public int heal;
     public int line_diag_number;
@@ -19,6 +21,13 @@ public class Actions : ScriptableObject
     public int pa_cost;
     public string name;
     public Sprite icon;
+}
+public enum ImpactMovement
+{
+    NONE,
+    PUSH,
+    PULL,
+    RUSH,
 }
 public enum ActionType
 {

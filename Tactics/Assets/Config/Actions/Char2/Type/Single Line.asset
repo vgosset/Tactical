@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Single Line
   m_EditorClassIdentifier: 
   t_action: 0
+  t_impact: 1
   t_target: {fileID: 11400000, guid: 4be2f51a977487d44a1888629c8c0da8, type: 2}
   a_zone: {fileID: 11400000, guid: 4ec40dc20366d30468954ad0ff785ff9, type: 2}
   projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
     type: 3}
+  movementAmount: 2
   damage: 5
   heal: 0
   line_diag_number: 0
