@@ -48,7 +48,7 @@ public class UiManager : MonoBehaviour
             case 1:
                 actionAmountUpdate.SetTrigger("amountUpdate");
                 actionAmountUpdate.transform.GetChild(0).GetComponent<Text>().text = ope + " " + amount.ToString();
-               
+                
                 n_pa.text = value.ToString();
             break;
 
@@ -67,10 +67,8 @@ public class UiManager : MonoBehaviour
         amountUpdate.SetTrigger("amountUpdate");
 
         int life = System.Convert.ToInt32(lifeUiChar.text);
-        if (ope == "+")
-            lifeUiChar.text = (life + value).ToString();
-        else
-            lifeUiChar.text = (life - value).ToString();
+        
+        lifeUiChar.text = (life + value).ToString();
     }
     public void UpdatePanelId(Character current)
     {

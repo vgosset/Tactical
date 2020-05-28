@@ -8,6 +8,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     public List<GameObject> l_char_init;
+    public List<Vector3> l_spawn_pos;
     public Vector2 mapSize;
 
     void Awake()
@@ -18,7 +19,7 @@ public class MainManager : MonoBehaviour
 
     void Start()
     {
-      StartGame();
+        StartGame();
     }
     void Update()
     {
@@ -37,20 +38,27 @@ public class MainManager : MonoBehaviour
     }
     void Shuffle()
     {
-      for (int i = 0; i < l_char_init.Count; i++)
-      {
-          GameObject tmp = l_char_init[i];
-          int randomIndex = Random.Range(i, l_char_init.Count);
+        for (int i = 0; i < l_char_init.Count; i++)
+        {
+            GameObject tmp = l_char_init[i];
+            int randomIndex = Random.Range(i, l_char_init.Count);
 
-          l_char_init[i] = l_char_init[randomIndex];
-          l_char_init[randomIndex] = tmp;
-      }
+            l_char_init[i] = l_char_init[randomIndex];
+            l_char_init[randomIndex] = tmp;
+        }
     }
     void Spawn()
     {
-      l_char_init[0] = Instantiate(l_char_init[0], new Vector3(9,1.5f,0), Quaternion.identity);
-    //   l_char_init[0] = Instantiate(l_char_init[0], new Vector3(0,1.5f,0), Quaternion.identity);
-      l_char_init[1] = Instantiate(l_char_init[1], new Vector3(0,1.5f,12), Quaternion.identity);
+        for (int i = 0; i < l_char_init.Count; i++)
+        {
+            int id = Random.Range(0, l_spawn_pos.Count);
+
+            Vector3 rnd = l_spawn_pos[id];
+
+            l_char_init[i] = Instantiate(l_char_init[i], rnd, Quaternion.identity);
+
+            l_spawn_pos.RemoveAt(id);
+        }
     }
 
 
@@ -72,15 +80,14 @@ public class MainManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-
-          if (hit.collider.tag == "Character")
-                hit.transform.GetComponent<Character>().ShowUiStats();
-          else
-              UiManager.Instance.HideUiChar();
+            if (hit.collider.tag == "Character")
+                    hit.transform.GetComponent<Character>().ShowUiStats();
+            else
+                UiManager.Instance.HideUiChar();
         }
     }
     public void EndGame()
     {
-         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

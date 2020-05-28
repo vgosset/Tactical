@@ -28,7 +28,8 @@ public class Lifes : MonoBehaviour
 
         n_life += value;
 
-        UiManager.Instance.UpdateLifeOnPos(value, ope, transform.position);
+        if (value != 0)
+            UiManager.Instance.UpdateLifeOnPos(value, ope, transform.position);
         
         if (n_life <= 0)
             Death();
