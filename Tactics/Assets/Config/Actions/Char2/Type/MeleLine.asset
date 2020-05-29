@@ -18,7 +18,7 @@ MonoBehaviour:
   a_zone: {fileID: 11400000, guid: 4ec40dc20366d30468954ad0ff785ff9, type: 2}
   projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
     type: 3}
-  movementAmount: 1
+  movementAmount: 3
   damage: 4
   heal: 0
   line_diag_number: 0

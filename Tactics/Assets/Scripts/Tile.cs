@@ -51,11 +51,16 @@ public class Tile : MonoBehaviour
       target = false;
       selectableMove = false;
       selectableAction = false;
-      movementDetection = false;
+
+      RemoveMovementPrediction(); //  TO APPLY FOR ALL STATS
 
       visited = false;
       parent = null;
       distance = 0;
+    }
+    public void RemoveMovementPrediction()
+    {
+        movementDetection = false;
     }
     public void DefaultColorOnly(bool state)
     {

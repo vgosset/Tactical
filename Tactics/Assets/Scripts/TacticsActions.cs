@@ -8,6 +8,7 @@ public class TacticsActions : MonoBehaviour
     public int n_pm;
 
     Tile tmp_tileTarget = new Tile();
+    Tile tmp_tileMovementPrediction = new Tile();
 
     public List<Tile> selectableTiles = new List<Tile>();
 
@@ -67,6 +68,8 @@ public class TacticsActions : MonoBehaviour
                 {
                     tmp_tileTarget.target = false;
                     tmp_tileTarget = new Tile();
+
+                    ActionManager.Instance.RemovePrediction();
                 }
             }
             if (hit.collider.tag == "Character")
@@ -179,53 +182,55 @@ public class TacticsActions : MonoBehaviour
 
     private void PredictionPush(Tile t)
     {
-        Tile tile;
-
+        ActionManager.Instance.RemovePrediction();
+        
         float c_z = transform.position.z;
         float c_x = transform.position.x;
         float t_x = t.transform.position.x;
-        float t_z = t.transform.position.x;
+        float t_z = t.transform.position.z;
 
         Vector3 off = transform.position - t.transform.position;
         Vector3 dir = Vector3.zero;
 
-        if (off.x >= off.z)
+        if (Mathf.Abs(off.x) >= Mathf.Abs(off.z))
         {
             if (c_x > t_x)
-                dir = Vector3.forward;
+                dir = -Vector3.right;
             else if  (c_x < t_x)
-                dir = -Vector3.forward;  
+                dir = Vector3.right;
         }
-        
-        else if (off.x <= off.z)
+        else if (Mathf.Abs(off.x) <= Mathf.Abs(off.z))
         {
             if (c_z > t_z)
-                dir = Vector3.right; 
+                dir = -Vector3.forward; 
             else if  (c_z < t_z)          
-                dir = -Vector3.right; 
+                dir = Vector3.forward;
         }
-        GetNextTile(dir, t);
+
+        tmp_tileMovementPrediction = t;
+
+        for (int i = 0; i < c_action.movementAmount; i++)
+        {
+            GetNextTile(dir, tmp_tileMovementPrediction);
+        }
     }
 
     private void GetNextTile(Vector3 direction, Tile t)
     {
-      Vector3 halfExtants = new Vector3(0.25f, (1 + 2) / 2.0f, 0.25f);
-      Collider[] colliders = Physics.OverlapBox(t.transform.position + direction, halfExtants);
+        Vector3 halfExtants = new Vector3(0.25f, (1 + 2) / 2.0f, 0.25f);
+        Collider[] colliders = Physics.OverlapBox(t.transform.position + direction, halfExtants);
 
-      foreach (Collider item in colliders)
-      {
-        Tile tile = item.GetComponent<Tile>();
-
-        if (tile)
+        foreach (Collider item in colliders)
         {
-            tile.movementDetection = true;
-            Debug.Log(direction);
-        }
-      }
-      if (colliders.Length == 0)
-            ActionManager.Instance.UnSelectAllTiles();
-    }
+            Tile tile = item.GetComponent<Tile>();
 
+            if (tile && tile.walkable)
+            {
+                tile.movementDetection = true;
+                tmp_tileMovementPrediction = tile;
+            }
+        }
+    }
     public Tile GetCurrentTile()
     {
         return GetTargetTile(gameObject);

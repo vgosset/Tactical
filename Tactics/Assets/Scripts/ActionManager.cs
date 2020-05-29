@@ -62,6 +62,11 @@ public class ActionManager : MonoBehaviour
         // c_actionOn = false;
         UnSelectAllTiles();
     }
+    public void RemovePrediction()
+    {
+        foreach (GameObject tile in tiles)
+            tile.GetComponent<Tile>().RemoveMovementPrediction();
+    }
 
     public void UnSelectAllTiles()
     {

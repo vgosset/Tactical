@@ -17,7 +17,7 @@ MonoBehaviour:
   t_target: {fileID: 11400000, guid: d40369bca329fa846b597a17c0f34e89, type: 2}
   a_zone: {fileID: 11400000, guid: 4ec40dc20366d30468954ad0ff785ff9, type: 2}
   projectile: {fileID: 100748, guid: cd4d7020429cde74db076ffa72495419, type: 3}
-  movementAmount: 3
+  movementAmount: 2
   damage: 0
   heal: 2
   line_diag_number: 0
