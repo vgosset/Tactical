@@ -39,6 +39,12 @@ public class Lifes : MonoBehaviour
         n_life = n;
         ActionManager.Instance.UpdateCharActions();
     }
+    public void PushTo(Vector3 dest)
+    {
+        transform.position = new Vector3(dest.x, 1.5f, dest.z);
+
+        GetComponent<CharacterMove>().GetCurrentTile();
+    }
     void Death()
     {
         // isDead = true;

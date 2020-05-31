@@ -53,12 +53,12 @@ public class TacticsActions : MonoBehaviour
                 if (t.selectableAction)
                 {
                     if (Input.GetMouseButtonUp(0) && ActionIsPossbile())
-                        Fire(t, 1);
+                        HandleFire(t);
                     if (!t.target)
                     {
                         t.target = true;
 
-                        if (c_action.t_impact == ImpactMovement.PUSH)
+                        if (c_action && c_action.t_impact == ImpactMovement.PUSH)
                             PredictionPush(t);
                         tmp_tileTarget.target = false;
                         tmp_tileTarget = t;
@@ -78,7 +78,7 @@ public class TacticsActions : MonoBehaviour
                 if (t.selectableAction)
                 {
                     if (Input.GetMouseButtonUp(0) && ActionIsPossbile())
-                        Fire(t, 1);
+                        HandleFire(t);
                 }
             }
         }
@@ -152,16 +152,29 @@ public class TacticsActions : MonoBehaviour
         }
         return true;
     }
-
-    private void Fire(Tile t, int damage)
+    private void HandleFire(Tile t)
     {
-        n_pa -= c_action.pa_cost;
-        n_pm -= c_action.pm_cost;
+        if (c_action.t_impact == ImpactMovement.PUSH)
+            Push(t);            
+        else if (c_action.t_impact == ImpactMovement.JUMP)
+            Jump(t);      
+        else
+            Fire(t);
+    }
+    private void Jump(Tile t)
+    {
 
-        UiManager.Instance.UpdateStatsAmount(1, n_pa, c_action.pa_cost, "-");
-        UiManager.Instance.UpdateStatsAmount(2, n_pm, c_action.pm_cost, "-");
+        transform.position = new Vector3(t.transform.position.x, 1.5f, t.transform.position.z);
 
-        character.m_characterMove.move -= c_action.pm_cost;
+         if (!ActionIsPossbile())
+            ActionManager.Instance.CancelAllActions();
+        
+        RemoveActionStats();
+    }
+
+    private void Fire(Tile t)
+    {
+        RemoveActionStats();
 
         if (t.c_inTile != null)
         {
@@ -179,6 +192,16 @@ public class TacticsActions : MonoBehaviour
         if (!ActionIsPossbile())
             ActionManager.Instance.CancelAllActions();
     }
+    private void RemoveActionStats()
+    {
+        n_pa -= c_action.pa_cost;
+        n_pm -= c_action.pm_cost;
+
+        UiManager.Instance.UpdateStatsAmount(1, n_pa, c_action.pa_cost, "-");
+        UiManager.Instance.UpdateStatsAmount(2, n_pm, c_action.pm_cost, "-");
+
+        character.m_characterMove.move -= c_action.pm_cost;
+    }
 
     private void PredictionPush(Tile t)
     {
@@ -192,19 +215,31 @@ public class TacticsActions : MonoBehaviour
         Vector3 off = transform.position - t.transform.position;
         Vector3 dir = Vector3.zero;
 
-        if (Mathf.Abs(off.x) >= Mathf.Abs(off.z))
+        if (Mathf.Abs(off.x) > Mathf.Abs(off.z))
         {
             if (c_x > t_x)
                 dir = -Vector3.right;
             else if  (c_x < t_x)
                 dir = Vector3.right;
         }
-        else if (Mathf.Abs(off.x) <= Mathf.Abs(off.z))
+        else if (Mathf.Abs(off.x) < Mathf.Abs(off.z))
         {
             if (c_z > t_z)
                 dir = -Vector3.forward; 
             else if  (c_z < t_z)          
                 dir = Vector3.forward;
+        }
+        else
+        {
+            int x = 1;
+            int z = 1;
+
+            if (off.x > 0)
+                x = -1;
+            if (off.z > 0)
+                z = -1;
+            
+            dir = new Vector3(x,0,z);
         }
 
         tmp_tileMovementPrediction = t;
@@ -212,6 +247,21 @@ public class TacticsActions : MonoBehaviour
         for (int i = 0; i < c_action.movementAmount; i++)
         {
             GetNextTile(dir, tmp_tileMovementPrediction);
+        }
+    }
+
+    private void Push(Tile t)
+    {
+        Tile t_dest = tmp_tileMovementPrediction;
+
+        if (t.c_inTile != null)
+        {
+            Lifes c_life = t.c_inTile.GetComponent<Lifes>();
+            c_life.PushTo(t_dest.transform.position);
+
+            Fire(tmp_tileMovementPrediction);
+
+            t.c_inTile = null;
         }
     }
 

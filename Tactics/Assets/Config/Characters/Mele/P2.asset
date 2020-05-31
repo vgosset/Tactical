@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46d3c25a9da8a174abb778c770302365, type: 3}
-  m_Name: P1
+  m_Name: P2
   m_EditorClassIdentifier: 
   id: 1
   l_action:
-  - {fileID: 11400000, guid: dff5e1fcbaa21fa4e9f8a884b53ce085, type: 2}
-  - {fileID: 11400000, guid: 00c02f81024618a4cacae28e6902682e, type: 2}
-  - {fileID: 11400000, guid: 1ec11c31946b65748bf4c19eeaee0ee0, type: 2}
-  n_pm: 5
+  - {fileID: 11400000, guid: 8e99667c8f6b7a5499ad3a43773d4d9b, type: 2}
+  - {fileID: 11400000, guid: 25e2913f817aa4243af04a6a57fb7a59, type: 2}
+  - {fileID: 11400000, guid: 6c4fcf4466a07794ea8c140e3affa4be, type: 2}
+  n_pm: 6
   n_pa: 8
-  n_lifes: 10
+  n_lifes: 30
   uiTexture: {fileID: 8400000, guid: 69daeff28b4201b4688a6540f2448c42, type: 2}

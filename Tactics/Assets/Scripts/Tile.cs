@@ -30,7 +30,15 @@ public class Tile : MonoBehaviour
 
     void Update()
     {
-        // if (current)
+        if (!this.name.Contains("Obstacle"))
+        {
+          TileColorHandeler();
+        }
+       
+    }
+    private void TileColorHandeler()
+    {
+ // if (current)
           // GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("current");
         if (movementDetection)
             GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("MovmentDetection");

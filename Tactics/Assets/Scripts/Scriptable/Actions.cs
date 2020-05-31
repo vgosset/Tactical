@@ -28,6 +28,7 @@ public enum ImpactMovement
     PUSH,
     PULL,
     RUSH,
+    JUMP,
 }
 public enum ActionType
 {

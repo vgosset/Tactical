@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b73c61c9872df8e4fbaff67fed886b07, type: 3}
-  m_Name: Line
+  m_Name: RallPm
   m_EditorClassIdentifier: 
   t_action: 0
-  t_target: {fileID: 11400000, guid: 3f81aa2e4754f6e4dae54ca2dbda318c, type: 2}
+  t_impact: 0
+  t_target: {fileID: 11400000, guid: d40369bca329fa846b597a17c0f34e89, type: 2}
   a_zone: {fileID: 11400000, guid: 4ec40dc20366d30468954ad0ff785ff9, type: 2}
-  projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
-    type: 3}
-  damage: 1
+  projectile: {fileID: 100748, guid: cd4d7020429cde74db076ffa72495419, type: 3}
+  movementAmount: 2
+  damage: 0
+  heal: 2
   line_diag_number: 0
-  pm_cost: 0
-  pa_cost: 3
+  pm_cost: 2
+  pa_cost: 2
   name: L2 1-4
-  icon: {fileID: 21300154, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}
+  icon: {fileID: 21300058, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7875803196341073520}
   - component: {fileID: 7875803196341073535}
   - component: {fileID: 7875803196341073534}
-  m_Layer: 10
-  m_Name: Obstacle
-  m_TagString: Tile
+  m_Layer: 8
+  m_Name: ObstacleBlock
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7875803196341073532}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7, y: 0.34, z: 0}
   m_LocalScale: {x: 1, y: 2.4534, z: 1}
   m_Children: []
@@ -90,7 +90,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7875803196341073534
 MonoBehaviour:
@@ -113,6 +113,7 @@ MonoBehaviour:
   target: 0
   selectableMove: 0
   selectableAction: 0
+  movementDetection: 0
   adjTileLst: []
   visited: 0
   parent: {fileID: 0}

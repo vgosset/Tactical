@@ -127,7 +127,7 @@ MonoBehaviour:
     m_Bits: 512
   ObstacleMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 256
   visibleTargets: []
 --- !u!1 &3316806069886575897
 GameObject:

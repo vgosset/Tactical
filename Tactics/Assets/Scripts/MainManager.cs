@@ -51,13 +51,13 @@ public class MainManager : MonoBehaviour
     {
         for (int i = 0; i < l_char_init.Count; i++)
         {
-            int id = Random.Range(0, l_spawn_pos.Count);
+            // int id = Random.Range(0, l_spawn_pos.Count);
 
-            Vector3 rnd = l_spawn_pos[id];
+            // Vector3 rnd = l_spawn_pos[id];
 
-            l_char_init[i] = Instantiate(l_char_init[i], rnd, Quaternion.identity);
+            l_char_init[i] = Instantiate(l_char_init[i], l_spawn_pos[i], Quaternion.identity);
 
-            l_spawn_pos.RemoveAt(id);
+            // l_spawn_pos.RemoveAt(id);
         }
     }
 

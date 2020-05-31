@@ -59,7 +59,6 @@ public class ActionManager : MonoBehaviour
     {
         c_char.c_action = null;
         c_MovementOn = true;
-        // c_actionOn = false;
         UnSelectAllTiles();
     }
     public void RemovePrediction()
@@ -93,8 +92,6 @@ public class ActionManager : MonoBehaviour
             if (!c_char.m_characterMove.moving)
                 c_char.ActionsHandeler();
         }
-        else
-            CancelAllActions();
     }
     void SendAction()
     {

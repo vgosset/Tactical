@@ -152,6 +152,7 @@ public class TacticsMove : MonoBehaviour
       if (currentTile != null)
       {
         currentTile.current = false;
+        currentTile.c_inTile = null;
         currentTile = null;
       }
       foreach (Tile tile in selectableTiles)

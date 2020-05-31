@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbb0c2e060eb66a47af787e472326624, type: 3}
-  m_Name: Mele
+  m_Name: Jump
   m_EditorClassIdentifier: 
   type: 2
   self: 0

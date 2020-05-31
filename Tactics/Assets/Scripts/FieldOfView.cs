@@ -42,7 +42,9 @@ public class FieldOfView : MonoBehaviour
             Transform target = targetInViewRadius[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
 
-            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
+            if (!c_action.t_target.ldv)
+                visibleTargets.Add(target);
+            else if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
             {
                 float dstTarget = Vector3.Distance(transform.position, target.position);
 
