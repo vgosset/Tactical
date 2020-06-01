@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RallPm
   m_EditorClassIdentifier: 
   type: 2
-  self: 1
-  ldv: 0
+  self: 0
+  ldv: 1
   minRange: 0
-  maxRange: 0
+  maxRange: 4

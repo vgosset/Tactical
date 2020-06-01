@@ -166,7 +166,7 @@ public class TacticsActions : MonoBehaviour
 
         transform.position = new Vector3(t.transform.position.x, 1.5f, t.transform.position.z);
 
-         if (!ActionIsPossbile())
+        if (!ActionIsPossbile())
             ActionManager.Instance.CancelAllActions();
         
         RemoveActionStats();
@@ -184,6 +184,11 @@ public class TacticsActions : MonoBehaviour
                 c_life.GetHit(-c_action.damage, true);
             if (c_action.heal > 0)
                 c_life.GetHit(c_action.heal, false);
+
+            if (c_action.rallPm > 0)
+            {
+                c_life.GetComponent<CharacterMove>().RemoveMovement(c_action.rallPm);
+            }
 
             GameObject tmp = Instantiate(c_action.projectile, t.c_inTile.transform.position, c_action.projectile.transform.rotation);
 

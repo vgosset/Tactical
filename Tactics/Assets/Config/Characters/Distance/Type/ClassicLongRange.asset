@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_action: 2
   t_impact: 1
-  t_target: {fileID: 11400000, guid: fda5acef9c7e16a4a92866df21efdd61, type: 2}
-  a_zone: {fileID: 11400000, guid: 4ec40dc20366d30468954ad0ff785ff9, type: 2}
+  t_target: {fileID: 11400000, guid: 43fc0878e7e9e504685a571369fd7541, type: 2}
+  a_zone: {fileID: 0}
   projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
     type: 3}
   movementAmount: 1

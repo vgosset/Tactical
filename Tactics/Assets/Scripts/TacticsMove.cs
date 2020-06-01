@@ -182,4 +182,8 @@ public class TacticsMove : MonoBehaviour
             path.Pop();
         }
     }
+    public void RemoveMovement(int value)
+    {
+      move -= value;
+    }
 }

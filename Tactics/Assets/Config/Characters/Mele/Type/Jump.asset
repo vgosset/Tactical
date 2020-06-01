@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_action: 2
   t_impact: 4
-  t_target: {fileID: 11400000, guid: 4be2f51a977487d44a1888629c8c0da8, type: 2}
-  a_zone: {fileID: 11400000, guid: 4ec40dc20366d30468954ad0ff785ff9, type: 2}
+  t_target: {fileID: 11400000, guid: 5b3b108d92885d74e82c37f6e3e349d4, type: 2}
+  a_zone: {fileID: 0}
   projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
     type: 3}
   movementAmount: 0
+  rallPm: 0
   damage: 0
   heal: 0
   line_diag_number: 0
   pm_cost: 0
-  pa_cost: 4
+  pa_cost: 3
   name: L2 1-4
   icon: {fileID: 21300028, guid: e875f7d625a0b0f4bb1d8a67ae30cd1f, type: 3}

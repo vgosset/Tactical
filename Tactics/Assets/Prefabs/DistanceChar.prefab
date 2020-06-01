@@ -83,7 +83,7 @@ MonoBehaviour:
   n_pa: 6
   n_pm: 0
   selectableTiles: []
-  c_datas: {fileID: 11400000, guid: c5cc742d306a2e8439167ad7dc6a1305, type: 2}
+  c_datas: {fileID: 11400000, guid: 53f7f8df454e6c6448209945c28f54f4, type: 2}
   character: {fileID: 5192611924024758936}
   c_action: {fileID: 0}
   tiles: []
