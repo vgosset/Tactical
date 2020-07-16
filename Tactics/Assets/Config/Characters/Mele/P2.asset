@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   l_action:
-  - {fileID: 11400000, guid: 8e99667c8f6b7a5499ad3a43773d4d9b, type: 2}
-  - {fileID: 11400000, guid: 25e2913f817aa4243af04a6a57fb7a59, type: 2}
-  - {fileID: 11400000, guid: 6c4fcf4466a07794ea8c140e3affa4be, type: 2}
-  n_pm: 6
-  n_pa: 8
+  - {fileID: 11400000, guid: 6492287a34fde334c84d52f990861b3a, type: 2}
+  - {fileID: 11400000, guid: cd48b99c3253b384db53790648153ab0, type: 2}
+  - {fileID: 11400000, guid: fc38093792f59a444a4e897e41f1b486, type: 2}
+  n_pm: 5
+  n_pa: 9
   n_lifes: 30
   uiTexture: {fileID: 8400000, guid: 69daeff28b4201b4688a6540f2448c42, type: 2}

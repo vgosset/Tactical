@@ -14,6 +14,7 @@ public class Actions : ScriptableObject
     public ZoneEffect a_zone;
     public GameObject projectile;
     public int movementAmount;
+    public int rallPm;
     public int damage;
     public int heal;
     public int line_diag_number;
@@ -21,6 +22,7 @@ public class Actions : ScriptableObject
     public int pa_cost;
     public string name;
     public Sprite icon;
+    public int turnLimit;
 }
 public enum ImpactMovement
 {
