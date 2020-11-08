@@ -13,15 +13,16 @@ public class Character : TacticsActions
 
     public int t_currentId;
 
-    void Start()
+    private void Awake()
     {
-        tiles = GameObject.FindGameObjectsWithTag("Tile");
-
+        t_current = false;
+    }
+    private void Start()
+    {
         ResetSkills();
         GetComponent<Lifes>().SetLife(c_datas.n_lifes);
     }
-
-    void Update()
+    private void Update()
     {
         if (t_current && c_action)
             CheckMouseFire();
@@ -31,9 +32,13 @@ public class Character : TacticsActions
         if (t_current)
         {
             if  (c_action && c_action.t_action == ActionType.LINE)
+            {
                 GetTileInLine();
+            }
             if (c_action && c_action.t_action == ActionType.CLASSIC)
+            {
                 fovHandeler.FindClassicSelectableTile(c_action);
+            }
         }
     }
     public void ResetSkills()

@@ -6,7 +6,6 @@ public class TacticsMove : MonoBehaviour
 {
     public Character character;
     List<Tile> selectableTiles = new List<Tile>();
-    GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile;
@@ -23,19 +22,14 @@ public class TacticsMove : MonoBehaviour
 
     protected void Init()
     {
-      tiles = GameObject.FindGameObjectsWithTag("Tile");
-
       halfHeight = GetComponent<Collider>().bounds.extents.y;
-    }
-    void Update()
-    {
     }
     public void GetCurrentTile()
     {
-        currentTile = GetTargetTile(gameObject);
-        currentTile.current = true;
-        currentTile.c_inTile = character;
-        character.c_tile = currentTile;
+      currentTile = GetTargetTile(gameObject);
+      currentTile.current = true;
+      currentTile.c_inTile = character;
+      character.c_tile = currentTile;
     }
     public Tile GetTargetTile(GameObject target)
     {
@@ -45,25 +39,9 @@ public class TacticsMove : MonoBehaviour
           tile = hit.collider.GetComponent<Tile>();
       return tile;
     }
-    public void ComputeAdjLst()
-    {
-      foreach (GameObject tile in tiles)
-      {
-        Tile t = tile.GetComponent<Tile>();
-        t.FindNeighbors(jumpHeight, false, true);
-      }
-    }
-    public void RemoveLastPath()
-    {
-      foreach (GameObject tile in tiles)
-      {
-        tile.GetComponent<Tile>().mouseOnIt = false;
-        tile.GetComponent<Tile>().onCurrentPath = false;
-      }
-    }
     public void FindSelectableTiles()
     {
-      ComputeAdjLst();
+      TileManager.Instance.ComputeAdjLst(false, true);
       GetCurrentTile();
 
       Queue<Tile> process = new Queue<Tile>();
@@ -94,8 +72,6 @@ public class TacticsMove : MonoBehaviour
     }
     public void MoveToTile(Tile tile)
     {
-        // foreach (GameObject go in tiles)   //TMP default color after move begin
-        //     go.transform.GetComponent<Tile>().DefaultColorOnly(true);
         GeneratePath(tile);
         move -= path.Count - 1;
         character.n_pm = move;
@@ -158,7 +134,6 @@ public class TacticsMove : MonoBehaviour
       foreach (Tile tile in selectableTiles)
       {
         tile.Reset();
-        // tile.DefaultColorOnly(false);  //TMP default color after move begin
       }
       selectableTiles.Clear();
     }

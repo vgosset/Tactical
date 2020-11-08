@@ -16,19 +16,7 @@ public class TacticsActions : MonoBehaviour
     public Character character;
     public Actions c_action;
 
-    public GameObject[] tiles;
-
     Tile currentTile;
-    
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-
-    }
-
     public bool ActionIsPossbile()
     {
         if (c_action)
@@ -38,7 +26,6 @@ public class TacticsActions : MonoBehaviour
         }
         return false;
     }
-
     public void CheckMouseFire()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -69,7 +56,7 @@ public class TacticsActions : MonoBehaviour
                     tmp_tileTarget.target = false;
                     tmp_tileTarget = new Tile();
 
-                    ActionManager.Instance.RemovePrediction();
+                    TileManager.Instance.RemovePrediction();
                 }
             }
             if (hit.collider.tag == "Character")
@@ -83,7 +70,6 @@ public class TacticsActions : MonoBehaviour
             }
         }
     }
-
     public void GetTileInLine()
     {
         selectableTiles.Clear();
@@ -94,9 +80,10 @@ public class TacticsActions : MonoBehaviour
         FindLine(-Vector3.right);
 
         if (c_action.t_target.self)
+        {
             GetCurrentTile().selectableAction = true;
+        }
     }
-
     public void FindLine(Vector3 direction)
     {
         if (c_action.t_target.ldv && CheckObstacleBeforeMinRange(direction) || !c_action.t_target.ldv)
@@ -106,7 +93,6 @@ public class TacticsActions : MonoBehaviour
             List<Tile> tmpLine = new List<Tile>();
 
             int distance =  c_action.t_target.minRange;
-
             while (distance <  c_action.t_target.maxRange)
             {
                 if (Physics.Raycast(pos + direction * distance, direction, out hit, 1))
@@ -128,7 +114,6 @@ public class TacticsActions : MonoBehaviour
             }
         }
     }
-
     bool CheckObstacleBeforeMinRange(Vector3 direction)
     {
         RaycastHit hit;
@@ -163,7 +148,6 @@ public class TacticsActions : MonoBehaviour
     }
     private void Jump(Tile t)
     {
-
         transform.position = new Vector3(t.transform.position.x, 1.5f, t.transform.position.z);
 
         if (!ActionIsPossbile())
@@ -171,7 +155,6 @@ public class TacticsActions : MonoBehaviour
         
         RemoveActionStats();
     }
-
     private void Fire(Tile t)
     {
         RemoveActionStats();
@@ -195,7 +178,9 @@ public class TacticsActions : MonoBehaviour
             MainManager.Instance.DestroyItem(tmp, 3);
         }
         if (!ActionIsPossbile())
+        {
             ActionManager.Instance.CancelAllActions();
+        }
     }
     private void RemoveActionStats()
     {
@@ -210,7 +195,7 @@ public class TacticsActions : MonoBehaviour
 
     private void PredictionPush(Tile t)
     {
-        ActionManager.Instance.RemovePrediction();
+        TileManager.Instance.RemovePrediction();
         
         float c_z = transform.position.z;
         float c_x = transform.position.x;

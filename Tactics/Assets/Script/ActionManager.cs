@@ -13,18 +13,15 @@ public class ActionManager : MonoBehaviour
 
     public Character c_char;
 
-    GameObject[] tiles;
 
     List<Character> c_lst = new List<Character>();
 
     Actions c_action;
 
 
-
-    void Awake()
+    private void Awake()
     {
         Instance = this;
-        tiles = GameObject.FindGameObjectsWithTag("Tile");
     }
     public void InitCharList(List<GameObject> lst)
     {
@@ -32,11 +29,8 @@ public class ActionManager : MonoBehaviour
             c_lst.Add(lst[i].transform.GetComponent<Character>());
         UpdateCharActions();
     }
-    void start()
-    {
-    }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonUp(1))
         {
@@ -59,35 +53,23 @@ public class ActionManager : MonoBehaviour
     {
         c_char.c_action = null;
         c_MovementOn = true;
-        UnSelectAllTiles();
-    }
-    public void RemovePrediction()
-    {
-        foreach (GameObject tile in tiles)
-            tile.GetComponent<Tile>().RemoveMovementPrediction();
-    }
-
-    public void UnSelectAllTiles()
-    {
-        foreach (GameObject tile in tiles)
-            tile.GetComponent<Tile>().Reset();
+        TileManager.Instance.UnSelectAllTiles();
     }
     public bool GetMovementState()
     {
         return c_MovementOn;
     }
-
     public void ActionActivated(Actions action)
     {
         c_MovementOn = false;
 
-        UnSelectAllTiles();
+        TileManager.Instance.UnSelectAllTiles();
 
         c_action = action;
         
         if (c_char.n_pa >= c_action.pa_cost && c_char.n_pm >= c_action.pm_cost)
         {
-            // c_actionOn = true;
+            c_actionOn = true;
             SendAction();
             if (!c_char.m_characterMove.moving)
                 c_char.ActionsHandeler();

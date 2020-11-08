@@ -14,7 +14,6 @@ public class TurnManager : MonoBehaviour
 
     public static TurnManager Instance;
 
-    GameObject[] tiles;
     public TurnPanel t_panel;
 
     public List<Character> c_lst;
@@ -30,18 +29,16 @@ public class TurnManager : MonoBehaviour
     }
     void Start()
     {
-        tiles = GameObject.FindGameObjectsWithTag("Tile");
         t_state = TurnState.IN_TURN;
     }
-    void Update()
-    {
-    }
-    public void InitCharList(List<GameObject> lst)
+    public void InitCharList(List<Character> lst)
     {
         for (int i = 0; i < lst.Count; i++)
-            c_lst.Add(lst[i].transform.GetComponent<Character>());
+            c_lst.Add(lst[i]);
+
+        InitTurn();
     }
-    public void InitTurn()
+    private void InitTurn()
     {
         c_stack.Clear();
         for (int i = 0; i < c_lst.Count; i++)
@@ -108,11 +105,4 @@ public class TurnManager : MonoBehaviour
     {
         c_stack.Peek().t_current = true;
     }
-    // public void RemoveTilesColor()
-    // {
-    //   foreach (GameObject tile in tiles)
-    //   {
-    //     tile.GetComponent<Renderer>().material.color = Color.white;
-    //   }
-    // }
 }

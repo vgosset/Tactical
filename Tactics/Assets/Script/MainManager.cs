@@ -27,14 +27,12 @@ public class MainManager : MonoBehaviour
     }
     void Init()
     {
-        Shuffle();
-        Spawn();
+        // Shuffle();
+        // Spawn();
     }
     void StartGame()
     {
-        TurnManager.Instance.InitCharList(l_char_init);
-        TurnManager.Instance.InitTurn();
-        ActionManager.Instance.InitCharList(l_char_init);
+    
     }
     void Shuffle()
     {

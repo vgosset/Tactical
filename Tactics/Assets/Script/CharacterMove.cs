@@ -45,18 +45,18 @@ public class CharacterMove : TacticsMove
               }
               if (!t.onCurrentPath || !t.mouseOnIt)
               {
-                  RemoveLastPath();
+                  TileManager.Instance.RemoveLastPath();
                   t.mouseOnIt = true;
                   ShowPath(t);
               }
             }
             else
-                RemoveLastPath();
+                TileManager.Instance.RemoveLastPath();
           }
           else
-              RemoveLastPath();
+              TileManager.Instance.RemoveLastPath();
         }
         else
-              RemoveLastPath();
+              TileManager.Instance.RemoveLastPath();
     }
 }

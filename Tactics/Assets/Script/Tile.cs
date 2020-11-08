@@ -21,11 +21,12 @@ public class Tile : MonoBehaviour
     public bool visited = false;
     public Tile parent = null;
     public int distance = 0;
-    bool defaultColorOnly = false;
+    private bool defaultColorOnly = false;
+    private Renderer rd;
 
-    void Start()
+    private void Awake()
     {
-
+        rd = GetComponent<Renderer>();
     }
 
     void Update()
@@ -34,22 +35,31 @@ public class Tile : MonoBehaviour
         {
           TileColorHandeler();
         }
-       
     }
     private void TileColorHandeler()
     {
- // if (current)
+      // if (current)
           // GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("current");
         if (movementDetection)
-            GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("MovmentDetection");
+        {
+            rd.material.color = TileManager.Instance.GetTileColor("MovmentDetection");
+        }
         else if (target || onCurrentPath)
-            GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("Path");
+        {
+            rd.material.color = TileManager.Instance.GetTileColor("Path");
+        }
         else if (selectableMove)
-          GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("PathOptions");
+        {
+            rd.material.color = TileManager.Instance.GetTileColor("PathOptions");
+        }
         else if (selectableAction)
-            GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("ActionsOptions");
+        {
+            rd.material.color = TileManager.Instance.GetTileColor("ActionsOptions");
+        }
         else
-            GetComponent<Renderer>().material.color = TilesColor.Instance.GetTileColor("none");
+        {
+            rd.material.color = TileManager.Instance.GetTileColor("none");
+        }
     }
 
     public void Reset()
@@ -59,7 +69,6 @@ public class Tile : MonoBehaviour
       target = false;
       selectableMove = false;
       selectableAction = false;
-
       RemoveMovementPrediction(); //  TO APPLY FOR ALL STATS
 
       visited = false;
