@@ -8,22 +8,13 @@ public class Action : MonoBehaviour
     Actions c_action;
 
     public GameObject hide;
+    public GameObject damage;
 
     public Image icon;
 
     public Text pa;
     public Text pm;
     public Text life;
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
 
     public void SetAction(Actions action)
     {
@@ -33,7 +24,6 @@ public class Action : MonoBehaviour
 
         pm.text = action.pm_cost.ToString();
         pa.text = action.pa_cost.ToString();
-        life.text = action.damage.ToString();
     }
 
     public void SendAction()
@@ -41,8 +31,11 @@ public class Action : MonoBehaviour
         ActionManager.Instance.ActionActivated(c_action);
     }
 
-    public void Toggle()
+    public void Toggle(bool state)
     {
-        hide.SetActive(true);
+        hide.SetActive(state);
+        damage.SetActive(state);
+
+        life.text = c_action.damage.ToString();
     }
 }

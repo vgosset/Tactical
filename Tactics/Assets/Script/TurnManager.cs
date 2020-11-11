@@ -81,12 +81,9 @@ public class TurnManager : MonoBehaviour
 
     public void NextCharTurn()
     {
-        // RemoveTilesColor();
         t_panel.NextTurn();
-        // StartCoroutine(BetweenTurns());
 
-        c_stack.Peek().t_current = false;
-        c_stack.Peek().c_tile.current = false;
+        c_stack.Peek().SetTurn(false);
         c_stack.Pop();
 
         if (c_stack.Count == 0)
@@ -95,14 +92,9 @@ public class TurnManager : MonoBehaviour
             SetCurrentCharacter();
         ActionManager.Instance.NextTurn();
     }
-    // IEnumerator BetweenTurns()
-    // {
-    //     t_state = TurnState.IN_TRANSITION;
-    //     yield return new WaitForSeconds(1f);
-    //     t_state = TurnState.IN_TURN;
-    // }
+    
     public void SetCurrentCharacter()
     {
-        c_stack.Peek().t_current = true;
+        c_stack.Peek().SetTurn(true);
     }
 }

@@ -40,8 +40,8 @@ public class MapGenerator : MonoBehaviour
     {
         for (int i = 0; i < obs_a; i++)
         {
-            Vector3 rdnPos = new Vector3(Random.Range(obsOff, rows - obsOff), 0, Random.Range(obsOff, col - obsOff));
-            if (!obsChar.Contains(rdnPos))
+            Vector3 rdnPos = new Vector3(Random.Range(obsOff, rows - obsOff), 0f, Random.Range(obsOff, col - obsOff));
+            if (!obsChar.Contains(rdnPos) && !obsPos.Contains(rdnPos))
             {
                 obsPos.Add(rdnPos);
 
@@ -50,6 +50,7 @@ public class MapGenerator : MonoBehaviour
             }
             else
             {
+                Debug.Log("dsds");
                 i--;
             }
         }

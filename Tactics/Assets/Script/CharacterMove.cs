@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterMove : TacticsMove
 {
+    [SerializeField] private LayerMask moveLayer;
     void Start()
     {
       Init();
@@ -31,7 +32,7 @@ public class CharacterMove : TacticsMove
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, moveLayer))
         {
           if (hit.collider.tag == "Tile")
           {

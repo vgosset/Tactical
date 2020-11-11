@@ -17,7 +17,7 @@ public class UiManager : MonoBehaviour
 
     public Text n_pm;
     public Text n_pa;
-    public Text n_lifes;
+    // public Text n_lifes;
 
     public Transform p_actionLst;
 
@@ -74,7 +74,7 @@ public class UiManager : MonoBehaviour
     {
         n_pa.text = current.c_datas.n_pa.ToString();
         n_pm.text = current.c_datas.n_pm.ToString();
-        n_lifes.text = current.GetComponent<Lifes>().n_life.ToString();
+        // n_lifes.text = current.GetComponent<Lifes>().n_life.ToString();
 
         for (int i = 0; i < current.c_datas.l_action.Count; i++)
         {

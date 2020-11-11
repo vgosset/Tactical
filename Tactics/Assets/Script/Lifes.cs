@@ -8,15 +8,6 @@ public class Lifes : MonoBehaviour
 
     public bool isDead = false;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
     public void GetHit(int value, bool damage)
     {
         string ope;
@@ -29,8 +20,9 @@ public class Lifes : MonoBehaviour
         n_life += value;
 
         if (value != 0)
+        {
             UiManager.Instance.UpdateLifeOnPos(value, ope, transform.position);
-        
+        }
         if (n_life <= 0)
             Death();
     }

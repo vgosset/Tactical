@@ -8,6 +8,10 @@ public class Character : TacticsActions
     public CharacterMove m_characterMove;
     public FieldOfView fovHandeler;
 
+    [SerializeField] private MeshRenderer torusMesh;
+    [SerializeField] private Material turnOn;
+    [SerializeField] private Material turnOff;
+
     public bool t_passed = false;
     public bool t_current = false;
 
@@ -61,5 +65,18 @@ public class Character : TacticsActions
     public void ShowUiStats()
     {
         UiManager.Instance.ShowUiChar(GetComponent<Lifes>().n_life, transform);
+    }
+    public void SetTurn(bool state)
+    {
+        t_current = state;
+        if (state)
+        {
+            torusMesh.material = turnOn;
+        }
+        else 
+        {
+            torusMesh.material = turnOff;
+            c_tile.current = false;
+        }
     }
 }
