@@ -16,8 +16,7 @@ MonoBehaviour:
   t_impact: 4
   t_target: {fileID: 11400000, guid: 5b3b108d92885d74e82c37f6e3e349d4, type: 2}
   a_zone: {fileID: 0}
-  projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
-    type: 3}
+  projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77, type: 3}
   movementAmount: 0
   rallPm: 0
   damage: 0
@@ -27,3 +26,5 @@ MonoBehaviour:
   pa_cost: 3
   name: L2 1-4
   icon: {fileID: 21300028, guid: e875f7d625a0b0f4bb1d8a67ae30cd1f, type: 3}
+  turnLimit: 0
+  animTrigger: Jump

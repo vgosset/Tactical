@@ -24,7 +24,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int obs_a;
     [SerializeField] private int obsOff;
     private List<Vector3> obsPos = new List<Vector3>();
-    private List<Vector3> obsChar = new List<Vector3>();
+    private List<Vector3> cPos = new List<Vector3>();
 
     private List<Character> l_char = new List<Character>();
     private void Start()
@@ -41,7 +41,7 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < obs_a; i++)
         {
             Vector3 rdnPos = new Vector3(Random.Range(obsOff, rows - obsOff), 0f, Random.Range(obsOff, col - obsOff));
-            if (!obsChar.Contains(rdnPos) && !obsPos.Contains(rdnPos))
+            if (!cPos.Contains(rdnPos) && !obsPos.Contains(rdnPos))
             {
                 obsPos.Add(rdnPos);
 
@@ -50,7 +50,6 @@ public class MapGenerator : MonoBehaviour
             }
             else
             {
-                Debug.Log("dsds");
                 i--;
             }
         }
@@ -71,16 +70,31 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
-    private void SpawnChar()
+    private void SpawnChar() // TMP
     {
-        Vector3 char1Pos  = new Vector3((int) Random.Range(charRows.x, charRows.y), 1.5f, (int) Random.Range(charCol.x, charCol.y));
-        Vector3 char2Pos  = new Vector3((int) Random.Range(rows - charRows.y, rows - charRows.x - 1), 1.5f, (int) Random.Range(charCol.x, charCol.y));
-        
-        obsChar.Add(new Vector3(char1Pos.x, 0, char1Pos.z));
-        obsChar.Add(new Vector3(char2Pos.x, 0, char2Pos.z));
+        int rnd = Random.Range(0, 2);
 
-        l_char.Add(Instantiate(l_char_obj[0], char1Pos, Quaternion.identity).transform.GetComponent<Character>());
-        l_char.Add(Instantiate(l_char_obj[1], char2Pos, Quaternion.identity).transform.GetComponent<Character>());
+        Vector3 c1Pos  = new Vector3((int) Random.Range(charRows.x, charRows.y), 1.5f, (int) Random.Range(charCol.x, charCol.y));
+        Vector3 c2Pos  = new Vector3((int) Random.Range(rows - charRows.y, rows - charRows.x - 1), 1.5f, (int) Random.Range(charCol.x, charCol.y));
+        
+        cPos.Add(new Vector3(c1Pos.x, 0, c1Pos.z));
+        cPos.Add(new Vector3(c2Pos.x, 0, c2Pos.z));
+
+        GameObject c1Obj = Instantiate(l_char_obj[rnd], c1Pos, Quaternion.identity);
+        c1Obj.transform.rotation = Quaternion.Euler(0, 90, 0);
+
+        Character c1 = c1Obj.GetComponent<Character>();
+        c1.Setup(0);
+        l_char.Add(c1);
+
+        l_char_obj.RemoveAt(rnd);
+
+        GameObject c2Obj = Instantiate(l_char_obj[0], c2Pos, Quaternion.identity);
+        c2Obj.transform.rotation = Quaternion.Euler(0, -90, 0);
+        
+        Character c2 = c2Obj.GetComponent<Character>();
+        c2.Setup(1);
+        l_char.Add(c2);
     }
     public void ResetScene()
     {

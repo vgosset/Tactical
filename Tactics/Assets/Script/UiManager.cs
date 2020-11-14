@@ -9,52 +9,44 @@ public class UiManager : MonoBehaviour
 
     public GameObject uiChar;
     
-    public Animator lifeAmountUpdate;
-    public Animator actionAmountUpdate;
-    public Animator moveAmountUpdate;
+    [SerializeField] private List<CharInfoUI> charInfoLst;
+    [SerializeField] private Animator actionUpdate_a;
+    [SerializeField] private Animator moveUpdate_a;
     
-    public Animator amountUpdate;
+    [SerializeField] private Animator Update_a;
 
     public Text n_pm;
     public Text n_pa;
-    // public Text n_lifes;
 
     public Transform p_actionLst;
 
-    Text lifeUiChar;
-    void Awake()
+    private Text lifeUiChar;
+    private void Awake()
     {
         Instance = this;
     }
-    void Start()
+    private void Start()
     {
         lifeUiChar = uiChar.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>();
     }
-
-    void Update()
+    public CharInfoUI GetCharInfo(int id)
     {
-
+        return charInfoLst[id];
     }
-    
     public void UpdateStatsAmount(int id, int value, int amount, string ope)
     {
         switch(id)
         {
-            case 0:
-                lifeAmountUpdate.SetTrigger("amountUpdate");
-                lifeAmountUpdate.transform.GetChild(0).GetComponent<Text>().text = ope + " " + amount.ToString();
-            break;
-
             case 1:
-                actionAmountUpdate.SetTrigger("amountUpdate");
-                actionAmountUpdate.transform.GetChild(0).GetComponent<Text>().text = ope + " " + amount.ToString();
+                actionUpdate_a.SetTrigger("amountUpdate");
+                actionUpdate_a.transform.GetChild(0).GetComponent<Text>().text = ope + " " + amount.ToString();
                 
                 n_pa.text = value.ToString();
             break;
 
             default:
-                moveAmountUpdate.SetTrigger("amountUpdate");
-                moveAmountUpdate.transform.GetChild(0).GetComponent<Text>().text = ope + " " + amount.ToString();
+                moveUpdate_a.SetTrigger("amountUpdate");
+                moveUpdate_a.transform.GetChild(0).GetComponent<Text>().text = ope + " " + amount.ToString();
                 
                 n_pm.text = value.ToString();
             break;
@@ -62,9 +54,9 @@ public class UiManager : MonoBehaviour
     }
     public void UpdateLifeOnPos(int value, string ope, Vector3 pos)
     {
-        amountUpdate.transform.position = Camera.main.WorldToScreenPoint(new Vector3(pos.x, pos.y, pos.z));
-        amountUpdate.transform.GetChild(0).GetComponent<Text>().text = ope + " " + value.ToString();
-        amountUpdate.SetTrigger("amountUpdate");
+        Update_a.transform.position = Camera.main.WorldToScreenPoint(new Vector3(pos.x, pos.y, pos.z));
+        Update_a.transform.GetChild(0).GetComponent<Text>().text = ope + " " + value.ToString();
+        Update_a.SetTrigger("amountUpdate");
 
         int life = System.Convert.ToInt32(lifeUiChar.text);
         
@@ -74,7 +66,6 @@ public class UiManager : MonoBehaviour
     {
         n_pa.text = current.c_datas.n_pa.ToString();
         n_pm.text = current.c_datas.n_pm.ToString();
-        // n_lifes.text = current.GetComponent<Lifes>().n_life.ToString();
 
         for (int i = 0; i < current.c_datas.l_action.Count; i++)
         {

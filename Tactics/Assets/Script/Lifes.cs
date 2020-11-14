@@ -8,6 +8,8 @@ public class Lifes : MonoBehaviour
 
     public bool isDead = false;
 
+    private CharInfoUI charInfo;
+
     public void GetHit(int value, bool damage)
     {
         string ope;
@@ -25,11 +27,15 @@ public class Lifes : MonoBehaviour
         }
         if (n_life <= 0)
             Death();
+
+        charInfo.UpdateLife(n_life);
     }
-    public void SetLife(int n)
+    public void SetLifeAndIcon(int n, int id, Texture texture)
     {
         n_life = n;
-        ActionManager.Instance.UpdateCharActions();
+
+        charInfo = UiManager.Instance.GetCharInfo(id);
+        charInfo.Setup(n_life, texture);
     }
     public void PushTo(Vector3 dest)
     {

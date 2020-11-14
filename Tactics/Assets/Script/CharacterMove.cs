@@ -42,6 +42,7 @@ public class CharacterMove : TacticsMove
             {
               if (Input.GetMouseButtonUp(0))
               {
+                moving = true;
                 MoveToTile(t);
               }
               if (!t.onCurrentPath || !t.mouseOnIt)

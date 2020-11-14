@@ -13,8 +13,11 @@ public class TacticsActions : MonoBehaviour
     public List<Tile> selectableTiles = new List<Tile>();
 
     public CharacterData c_datas;
+    public FieldOfView fovHandeler;
     public Character character;
     public Actions c_action;
+    public bool t_current = false;
+    public bool actionPlaying = false;
 
     Tile currentTile;
     public bool ActionIsPossbile()
@@ -40,13 +43,17 @@ public class TacticsActions : MonoBehaviour
                 if (t.selectableAction)
                 {
                     if (Input.GetMouseButtonUp(0) && ActionIsPossbile())
-                        HandleFire(t);
+                    {
+                        StartCoroutine(HandleFire(t));
+                    }
                     if (!t.target)
                     {
                         t.target = true;
 
                         if (c_action && c_action.t_impact == ImpactMovement.PUSH)
+                        {
                             PredictionPush(t);
+                        }
                         tmp_tileTarget.target = false;
                         tmp_tileTarget = t;
                     }
@@ -65,7 +72,9 @@ public class TacticsActions : MonoBehaviour
                 if (t.selectableAction)
                 {
                     if (Input.GetMouseButtonUp(0) && ActionIsPossbile())
-                        HandleFire(t);
+                    {
+                        StartCoroutine(HandleFire(t));
+                    }
                 }
             }
         }
@@ -137,14 +146,28 @@ public class TacticsActions : MonoBehaviour
         }
         return true;
     }
-    private void HandleFire(Tile t)
+    private IEnumerator HandleFire(Tile t)
     {
+        actionPlaying = true;
+        character.FireInTargetDir(c_action.animTrigger, t);
+
+        yield return new WaitForSeconds(0.35f);
+
         if (c_action.t_impact == ImpactMovement.PUSH)
+        {
             Push(t);            
+        }
         else if (c_action.t_impact == ImpactMovement.JUMP)
+        {
             Jump(t);      
+        }
         else
+        {
             Fire(t);
+        }
+        
+        yield return new WaitForSeconds(0.2f);
+        actionPlaying = false;
     }
     private void Jump(Tile t)
     {
@@ -252,6 +275,23 @@ public class TacticsActions : MonoBehaviour
             Fire(tmp_tileMovementPrediction);
 
             t.c_inTile = null;
+        }
+    }
+    public void ActionsHandeler()
+    {
+        if (t_current)
+        {
+            if (c_action)
+            {
+                if  (c_action.t_action == ActionType.LINE)
+                {
+                    GetTileInLine();
+                }
+                if (c_action.t_action == ActionType.CLASSIC)
+                {
+                    fovHandeler.FindClassicSelectableTile(c_action);
+                }
+            }
         }
     }
 

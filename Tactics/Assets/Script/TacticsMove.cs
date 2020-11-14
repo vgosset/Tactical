@@ -16,9 +16,9 @@ public class TacticsMove : MonoBehaviour
     public bool moving = false;
 
     Vector3 velocity = new Vector3();
-    Vector3 heading = new Vector3();
+    public Vector3 heading = new Vector3();
 
-    float halfHeight = 0;
+    public float halfHeight = 0;
 
     protected void Init()
     {
@@ -79,13 +79,13 @@ public class TacticsMove : MonoBehaviour
         character.n_pm = move;
 
         UiManager.Instance.UpdateStatsAmount(2, move, path.Count - 1, "-");
+
+        character.TriggerAnim("Move");
     }
     public void GeneratePath(Tile tile)
     {
       path.Clear();
       tile.target = true;
-
-      moving = true;
 
       Tile next = tile;
 
@@ -122,7 +122,7 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectedTiles();
             moving = false;
-            character.ActionsHandeler();
+            character.TriggerAnim("Idle");
         }
     }
     protected void RemoveSelectedTiles()
@@ -139,7 +139,7 @@ public class TacticsMove : MonoBehaviour
       }
       selectableTiles.Clear();
     }
-    void CalcHeading(Vector3 target)
+    public void CalcHeading(Vector3 target)
     {
       heading = target - transform.position;
       heading.Normalize();

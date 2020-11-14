@@ -16,9 +16,9 @@ MonoBehaviour:
   t_impact: 1
   t_target: {fileID: 11400000, guid: 43fc0878e7e9e504685a571369fd7541, type: 2}
   a_zone: {fileID: 0}
-  projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
-    type: 3}
+  projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77, type: 3}
   movementAmount: 1
+  rallPm: 0
   damage: 2
   heal: 0
   line_diag_number: 0
@@ -26,3 +26,5 @@ MonoBehaviour:
   pa_cost: 3
   name: L2 1-4
   icon: {fileID: 21300118, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}
+  turnLimit: 0
+  animTrigger: HighWeapon

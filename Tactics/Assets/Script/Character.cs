@@ -4,46 +4,34 @@ using UnityEngine;
 
 public class Character : TacticsActions
 {
+    [SerializeField] Texture iconTexture;
     public Tile c_tile;
     public CharacterMove m_characterMove;
-    public FieldOfView fovHandeler;
 
-    [SerializeField] private MeshRenderer torusMesh;
-    [SerializeField] private Material turnOn;
-    [SerializeField] private Material turnOff;
-
+    public Animator anim;
     public bool t_passed = false;
-    public bool t_current = false;
 
     public int t_currentId;
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         t_current = false;
     }
     private void Start()
     {
         ResetSkills();
-        GetComponent<Lifes>().SetLife(c_datas.n_lifes);
     }
     private void Update()
     {
-        if (t_current && c_action)
-            CheckMouseFire();
-    }
-    public void ActionsHandeler()
-    {
-        if (t_current)
+        if (t_current && c_action && !actionPlaying)
         {
-            if  (c_action && c_action.t_action == ActionType.LINE)
-            {
-                GetTileInLine();
-            }
-            if (c_action && c_action.t_action == ActionType.CLASSIC)
-            {
-                fovHandeler.FindClassicSelectableTile(c_action);
-            }
+            CheckMouseFire();
         }
+    }
+    public void Setup(int id)
+    {
+        GetComponent<Lifes>().SetLifeAndIcon(c_datas.n_lifes, id, iconTexture);
     }
     public void ResetSkills()
     {
@@ -69,14 +57,31 @@ public class Character : TacticsActions
     public void SetTurn(bool state)
     {
         t_current = state;
-        if (state)
-        {
-            torusMesh.material = turnOn;
-        }
-        else 
-        {
-            torusMesh.material = turnOff;
-            c_tile.current = false;
-        }
+        // if (state)
+        // {
+        //     torusMesh.material = turnOn;
+        // }
+        // else 
+        // {
+        //     torusMesh.material = turnOff;
+        //     c_tile.current = false;
+        // }
+    }
+    public void TriggerAnim(string s)
+    {
+        anim.SetTrigger(s);
+    }
+    public void FireInTargetDir(string s, Tile t)
+    {
+        Vector3 target = t.transform.position;
+        target.y += m_characterMove.halfHeight + t.GetComponent<Collider>().bounds.extents.y;
+        
+        RotateTo(target);
+        TriggerAnim(s);
+    }
+    private void RotateTo(Vector3 pos)
+    {
+        m_characterMove.CalcHeading(pos);
+        transform.forward = m_characterMove.heading;
     }
 }

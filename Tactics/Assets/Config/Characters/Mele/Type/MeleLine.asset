@@ -16,9 +16,9 @@ MonoBehaviour:
   t_impact: 0
   t_target: {fileID: 11400000, guid: f10bc50ba66d4ef4cb9ad7238fea5465, type: 2}
   a_zone: {fileID: 0}
-  projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77,
-    type: 3}
+  projectile: {fileID: 6720173704900527511, guid: c197b5053ea1cfe4fa0c929c6afd9c77, type: 3}
   movementAmount: 3
+  rallPm: 0
   damage: 4
   heal: 0
   line_diag_number: 0
@@ -26,3 +26,5 @@ MonoBehaviour:
   pa_cost: 4
   name: L2 1-4
   icon: {fileID: 21300062, guid: 1e627bcafe9e32d40ad554880f36b5eb, type: 3}
+  turnLimit: 0
+  animTrigger: MeleWeapon

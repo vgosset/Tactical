@@ -17,6 +17,7 @@ public class TargetSettings : ScriptableObject
 public enum TargetType
 {
     ALIES,
+    EMPTY,
     ENEMIES,
     ALL,
 }

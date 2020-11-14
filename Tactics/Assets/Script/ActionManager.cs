@@ -23,13 +23,18 @@ public class ActionManager : MonoBehaviour
     {
         Instance = this;
     }
+    private void Start()
+    {
+        UpdateCharActions();
+    }
     public void InitCharList(List<GameObject> lst)
     {
         for (int i = 0; i < lst.Count; i++)
+        {
             c_lst.Add(lst[i].transform.GetComponent<Character>());
+        }
         UpdateCharActions();
     }
-
     private void Update()
     {
         if (Input.GetMouseButtonUp(1))
