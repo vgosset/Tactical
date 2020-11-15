@@ -23,23 +23,13 @@ public class TacticsMove : MonoBehaviour
     protected void Init()
     {
       halfHeight = GetComponent<Collider>().bounds.extents.y;
+      GetCurrentTile();
     }
     public void GetCurrentTile()
     {
-      currentTile = GetTargetTile(gameObject);
+      currentTile = character.GetTargetTile(gameObject);
       currentTile.current = true;
       currentTile.c_inTile = character;
-      character.c_tile = currentTile;
-    }
-    public Tile GetTargetTile(GameObject target)
-    {
-      RaycastHit hit;
-      Tile tile = null;
-      if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
-      {
-          tile = hit.collider.GetComponent<Tile>();
-      }
-      return tile;
     }
     public void FindSelectableTiles()
     {
@@ -123,6 +113,7 @@ public class TacticsMove : MonoBehaviour
             RemoveSelectedTiles();
             moving = false;
             character.TriggerAnim("Idle");
+            GetCurrentTile();
         }
     }
     protected void RemoveSelectedTiles()

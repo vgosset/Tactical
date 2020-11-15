@@ -33,6 +33,17 @@ public class Character : TacticsActions
     {
         GetComponent<Lifes>().SetLifeAndIcon(c_datas.n_lifes, id, iconTexture);
     }
+    public Tile GetTargetTile(GameObject target)
+    {
+      RaycastHit hit;
+      Tile tile = null;
+      if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
+      {
+          tile = hit.collider.GetComponent<Tile>();
+      }
+      c_tile = tile;
+      return tile;
+    }
     public void ResetSkills()
     {
         n_pa = c_datas.n_pa;

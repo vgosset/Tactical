@@ -168,14 +168,16 @@ public class TacticsActions : MonoBehaviour
         
         yield return new WaitForSeconds(0.2f);
         actionPlaying = false;
+        // character.GetTargetTile(gameObject);
     }
     private void Jump(Tile t)
     {
         transform.position = new Vector3(t.transform.position.x, 1.5f, t.transform.position.z);
 
         if (!ActionIsPossbile())
+        {
             ActionManager.Instance.CancelAllActions();
-        
+        }
         RemoveActionStats();
     }
     private void Fire(Tile t)
@@ -313,15 +315,6 @@ public class TacticsActions : MonoBehaviour
     }
     public Tile GetCurrentTile()
     {
-        return GetTargetTile(gameObject);
-    }
-
-    public Tile GetTargetTile(GameObject target)
-    {
-        RaycastHit hit;
-        Tile tile = null;
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
-            tile = hit.collider.GetComponent<Tile>();
-        return tile;
+        return character.GetTargetTile(gameObject);
     }
 }
