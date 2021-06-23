@@ -29,11 +29,11 @@ public class MapGenerator : MonoBehaviour
     private List<Character> l_char = new List<Character>();
     private void Start()
     {
-        SpawnChar();
+        // SpawnChar();
         CreateObstacles();
         GenerateMap();
 
-        TurnManager.Instance.InitCharList(l_char);
+        // TurnManager.Instance.InitCharList(l_char);
         // StartCoroutine(GenerateMap());
     }
     private void CreateObstacles()

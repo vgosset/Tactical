@@ -25,7 +25,7 @@ public class ActionManager : MonoBehaviour
     }
     private void Start()
     {
-        UpdateCharActions();
+        // UpdateCharActions();
     }
     public void InitCharList(List<GameObject> lst)
     {
